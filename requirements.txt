@@ -1,8 +1,4 @@
 streamlit 
 pandas
-googleapiclient.discovery
-googleapiclient.errors
-mysql.connector
-mysql.connector
 streamlit_option_menu
-datetime
+
