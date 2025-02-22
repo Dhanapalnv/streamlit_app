@@ -13,7 +13,7 @@ from datetime import datetime
 # Set up the YouTube API
 api_service_name = "youtube"
 api_version = "v3"
-api_key = "AIzaSyBorjqk0jIF2HCDp0Fs5eHsOsR0Pn1iNiE"
+api_key = "api_key"
 
 # Create a YouTube API client
 youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey=api_key)
