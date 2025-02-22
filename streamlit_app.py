@@ -13,7 +13,7 @@ from datetime import datetime
 # Set up the YouTube API
 api_service_name = "youtube"
 api_version = "v3"
-api_key = "api_key"
+api_key = "AIzaSyBorjqk0jIF2HCDp0Fs5eHsOsR0Pn1iNiE"
 
 # Create a YouTube API client
 youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey=api_key)
@@ -265,6 +265,12 @@ ORDER BY comment_count DESC;"""
 
 # -------------------streamlit-------------------
 
+# Comfiguring Streamlit GUI 
+st.set_page_config(
+    page_title="Mr.Paul's Youtube analysis", 
+    page_icon="🥷", 
+    layout="wide")
+
 # Create a Streamlit UI
 menu_options = ["Channel_info", "View Table", "List of queries"]
 with st.sidebar:
@@ -334,10 +340,11 @@ if selected == menu_options[2]:
     selected_query = st.selectbox("Queries", list(query.keys()))
     st.write(get_db_data(query[selected_query]))
 
-else:
-    st.title("YouTube Channel Data")
-
 # -------------------streamlit-------------------
+
+#-------------------Table creation-------------------
+
+# query = """SELECT * FROM channel;"""
 
 
 #-------------------Table creation-------------------
@@ -392,3 +399,126 @@ else:
     
 # # save_to_db(comments)
 
+# #-------------------Table creation-------------------
+
+
+
+# print(get_channel_data("UC4JX40jDee_tINbkjycV4Sg"))
+# print(get_channel_playlist("UC4JX40jDee_tINbkjycV4Sg"))
+# print(get_video("PLzMcBGfZo4-lKuOp1lq_OToZloZEtXJuE"))
+# print(get_video("UU4JX40jDee_tINbkjycV4Sg"))
+# print(get_playlist_video_id("UC4JX40jDee_tINbkjycV4Sg"))
+
+# video_ids = ['EqtOAGq5JbE', 'xKhEyAkB79A', 'zr7PpbRxq3c', 'EABFumsYHRc', 'woX0_KrGttE']
+
+# print(get_video_data(video_ids))
+
+# print(get_commant_data("UC4JX40jDee_tINbkjycV4Sg"))
+
+
+# # Fetch channel data and save it to the database
+# channel_data = get_channel_data("UCuxhTSKtnMJizinblLs9xOA")
+# save_to_db(channel_data)
+
+# # Create a Streamlit UI
+# menu_options = ["Channel_info", "Queris", "Tasks", 'Settings']
+# selected = option_menu(None, menu_options, 
+#     icons=['info', 'question', "list-task", 'gear'], 
+#     menu_icon="cast", default_index=0, orientation="horizontal")
+
+# if selected == menu_options[0]: 
+#     st.title("YouTube Channel Data")
+#     channel_id = st.text_input("Enter YouTube channel ID:")
+#     if st.button("Get Channel Data"):
+#         try:
+#             channel_data = get_channel_data(channel_id)
+#             if channel_data:
+#                 st.write("Channel Name:", channel_data['channel_name'])
+#                 # st.write("Channel Description:", channel_data['channel_des'])
+#                 st.write("View Count:", channel_data['view_count'])
+#                 st.write("Subscriber Count:", channel_data['subscriber_count'])
+#                 st.write("Video Count:", channel_data['video_count'])
+#             else:
+#                 st.error("Error: Invalid channel ID or API error")
+#         except Exception as e:
+#             st.error(f"Error: {e}")
+# else:
+#     st.title("YouTube Channel Data")  
+
+
+
+#-------------------
+# video:
+# for item in playlist_videos:
+#             video_id = item['snippet']['resourceId']['videoId']
+#             video_response = youtube.videos().list(
+#                 part='snippet,statistics,contentDetails',
+#                 id=video_id
+#             ).execute()
+
+#             if video_response['items']:
+#                 video_information = {
+#                     "Video_Id": video_id,
+#                     "Video_Name": video_response['items'][0]['snippet']['title'] if 'title' in video_response['items'][0]['snippet'] else "Not Available",
+#                     "Video_Description": video_response['items'][0]['snippet']['description'],}
+
+# commant:
+# for comment in comments_response['items']:
+#                       comment_information = {
+#                           "Comment_Id": comment['snippet']['topLevelComment']['id'],
+#                           "Comment_Text": comment['snippet']['topLevelComment']['snippet']['textDisplay'],
+#                           "Comment_Author": comment['snippet']['topLevelComment']['snippet']['authorDisplayName'],
+#                           "Comment_PublishedAt": comment['snippet']['topLevelComment']['snippet']['publishedAt']
+#                       }
+#                       video_information['Comments'][comment_information['Comment_Id']] = comment_information
+
+#                   videos[video_id] = video_information
+
+# video info:
+# video_information = {
+#                     "Video_Id": video_id,
+#                     "Video_Name": video_response['items'][0]['snippet']['title'] 
+#                     "Video_Description": video_response['items'][0]['snippet']['description'],
+#                     "comment_information":{}
+#                     }
+
+
+# Example formar:
+# # Example format : {
+#                     "Channel_Name": {
+#                         "Channel_Name": "Example Channel",
+#                         "Channel_Id": "UC1234567890",
+#                         "Subscription_Count": 10000,
+#                         "Channel_Views": 1000000,
+#                         "Channel_Description": "This is an example channel.",
+#                         "Playlist_Id": "PL1234567890"
+#                         },
+#                     "Video_Id_1": {
+#                         "Video_Id": "V1234567890",
+#                         "Video_Name": "Example Video 1",
+#                         "Video_Description": "This is an example video.",
+#                         "Tags": ["example", "video"],
+#                         "PublishedAt": "2022-01-01T00:00:00Z",
+#                         "View_Count": 1000,
+#                         "Like_Count": 100,
+#                         "Dislike_Count": 10,
+#                         "Favorite_Count": 5,
+#                         "Comment_Count": 20,
+#                         "Duration": "00:05:00",
+#                         "Thumbnail": "https://example.com/thumbnail.jpg",
+#                         "Caption_Status": "Available",
+#                   "Comments": {
+#                       "Comment_Id_1": {
+#                           "Comment_Id": "C1234567890",
+#                           "Comment_Text": "This is a comment.",
+#                           "Comment_Author": "Example User",
+#                           "Comment_PublishedAt": "2022-01-01T00:01:00Z"
+#                       },
+#                       "Comment_Id_2": {
+#                           "Comment_Id": "C2345678901",
+#                           "Comment_Text": "This is another comment.",
+#                           "Comment_Author": "Another User",
+#                           "Comment_PublishedAt": "2022-01-01T00:02:00Z"
+#                       }
+#                   }
+#               },
