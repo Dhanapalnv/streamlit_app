@@ -1,4 +1,10 @@
 streamlit 
 pandas
 streamlit_option_menu
-
+sqlite3
+numpy
+mysql.connector
+streamlit_option_menu
+streamlit_option_menu
+youtube-data-api
+mysql
